@@ -12,6 +12,7 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
           <Button fx:id="btCategories" mnemonicParsing="false" onAction="#btCategoriesManagerAction" text="Menager kategori" />
+            <CheckBox fx:id="cbTree" mnemonicParsing="false" text="Tryb drzewa" />
         </items>
       </ToolBar>
    </top>
@@ -95,7 +96,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutX="144.0" layoutY="8.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox fx:id="vBox" layoutX="144.0" layoutY="8.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <HBox prefHeight="30.0" prefWidth="200.0" spacing="15.0">
                                  <children>
@@ -116,6 +117,8 @@
                                           <Insets left="40.0" />
                                        </HBox.margin>
                                     </Button>
+                                    <Label text="Łącznie: " />
+                                    <Label fx:id="lbTotal" text="lbTotal" />
                                  </children>
                               </HBox>
                               <TableView fx:id="tableHistoryReport" prefHeight="100.0" prefWidth="200.0">
@@ -127,32 +130,6 @@
                                     <TableColumn fx:id="columnPriceReport" minWidth="0.0" prefWidth="50.0" text="Cena" />
                                  </columns>
                               </TableView>
-                              <GridPane>
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="303.0" minWidth="10.0" percentWidth="30.0" prefWidth="294.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="161.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label text="Łącznie:" />
-                                    <Label fx:id="lbTotal" text="Label" GridPane.columnIndex="1">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <TreeTableView fx:id="treeTableView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" GridPane.rowSpan="2">
-                                       <columns>
-                                          <TreeTableColumn fx:id="treeColumnCategory" prefWidth="75.0" text="Kategoria" />
-                                          <TreeTableColumn fx:id="treeColumnPrice" prefWidth="75.0" text="Cena" />
-                                       </columns>
-                                    </TreeTableView>
-                                 </children>
-                              </GridPane>
                            </children>
                         </VBox>
                      </children></AnchorPane>

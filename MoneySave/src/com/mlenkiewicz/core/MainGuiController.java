@@ -14,11 +14,15 @@ import com.mlenkiewicz.model.Helper;
 import com.mlenkiewicz.model.SpendMoneyModel;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -30,6 +34,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 
@@ -68,7 +73,7 @@ public class MainGuiController {
 	private TableColumn<SpendMoneyModel, String> columnNr;
 
 	@FXML
-	private TableView<SpendMoneyModel> tableHistoryReport;
+	private TableView<SpendMoneyModel> tableHistoryReport ;
 	@FXML
 	private TableColumn<SpendMoneyModel, String> columnSpendDateReport;
 	@FXML
@@ -85,13 +90,34 @@ public class MainGuiController {
 
 	// Testowe Drzewo
 	@FXML
-	private TreeTableView<SpendMoney> treeTableView;
+	private TreeTableView<SpendMoney> treeTableView=new TreeTableView<>();
 	@FXML
-	private TreeTableColumn<SpendMoney, String> treeColumnPrice;
+	private TreeTableColumn<SpendMoney, String> treeColumnPrice=new TreeTableColumn<>("Koszt");
 	@FXML
-	private TreeTableColumn<SpendMoney, String> treeColumnCategory;
+	private TreeTableColumn<SpendMoney, String> treeColumnCategory=new TreeTableColumn<SpendMoney, String>("Category");
 
+	@FXML
+	private CheckBox cbTree;
+	@FXML
+	private VBox vBox;
+	
 	private void initializeTree() {
+		
+		
+		treeTableView.getColumns().add(treeColumnCategory);
+		treeTableView.getColumns().add(treeColumnPrice);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		SpendMoney spend = new SpendMoney();
 		Category category = new Category();
 		category.setId(1L);
@@ -130,8 +156,37 @@ public class MainGuiController {
 		initializeHistoryTable();
 		initializeDatePickers();
 		initializeTree();
+		
+	
+		
+		
+		cbTree.selectedProperty().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
+		System.out.println("UWAGA1 "+oldValue);
+		System.out.println("UWAGA2 "+newValue);	
+		setTreeMode(newValue);
+			
+		
+			}
+		});
 	}
 
+	private void setTreeMode(boolean isTreeMode){
+		System.out.println("Dzieci: "+vBox.getChildren().size());
+		vBox.getChildren().remove(1);
+		if(isTreeMode){
+	
+		vBox.getChildren().add(treeTableView);
+		
+		}else
+
+		vBox.getChildren().add(tableHistoryReport);
+		
+	}
+	
+	
 	private void initializeDatePickers() {
 		datePicker.setValue(LocalDate.now());
 		initializeDateForm();
@@ -289,6 +344,7 @@ public class MainGuiController {
 
 	}
 
+	
 	// Category categoryRoot = new Category();
 	// categoryRoot.setName("ROOT");
 	// TreeItem<Category> root = new TreeItem<Category>(categoryRoot);

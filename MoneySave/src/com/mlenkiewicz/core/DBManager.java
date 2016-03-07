@@ -32,6 +32,7 @@ public class DBManager {
 		manager.getTransaction().begin();
 		manager.persist(category);
 		manager.getTransaction().commit();
+		
 	}
 	public static List<Category> getCategories(){
 		return manager.createQuery("SELECT c FROM Category c").getResultList();
